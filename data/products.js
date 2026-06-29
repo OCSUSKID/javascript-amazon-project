@@ -656,5 +656,40 @@ const products = [
       "apparel",
       "mens"
     ]
+  },
+  {
+    id: "cfde234e-f2de-ced3-f3df-abe3d4fjk32f",
+    image: "images/products/backpack.jpg",
+    name: "Men's Extra-Layer Backpack",
+    rating: {
+      stars: 4,
+      count: 2133
+    },
+    priceCents: 1299,
+    keywords: [
+      "backpack",
+      "mens",
+      "bag"
+    ]
+  },
+  {
+    id: "ef34g9dg-e3de-s23f-age5-mindgw24d2gf",
+    image: "images/products/umbrella.jpg",
+    name: "SunFounder Ultimate Starter Kit Compatible with Arduino UNO IDE Scratch, 3 in 1 IoT/Smart Car/Basic Kit with Online Tutorials, Video Courses, 192 Items, 87 Projects, Suitable for Age 8+ Beginners",
+    rating: {
+      stars: 4.5,
+      count: 308
+    },
+    priceCents: 4800,
+    keywords: [
+      "arduino",
+      "starter kit",
+      "sunfounder",
+      "arduino uno",
+      "basic kit",
+      "smart car",
+      "IoT",
+      "IDE"
+    ]
   }
 ];
