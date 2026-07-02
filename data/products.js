@@ -674,7 +674,7 @@ export const products = [
   },
   {
     id: "ef34g9dg-e3de-s23f-age5-mindgw24d2gf",
-    image: "images/products/umbrella.jpg",
+    image: "images/products/sunfounder-ultimate-starter-kit.jpg",
     name: "SunFounder Ultimate Starter Kit Compatible with Arduino UNO IDE Scratch, 3 in 1 IoT/Smart Car/Basic Kit with Online Tutorials, Video Courses, 192 Items, 87 Projects, Suitable for Age 8+ Beginners",
     rating: {
       stars: 4.5,
