@@ -1,9 +1,9 @@
-import { 
-  cart, 
+import {
+  cart,
   removeFromCart,
-  calculateCartQuantity, 
+  calculateCartQuantity,
   updateQuantity
- } from "../data/cart.js";
+} from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
@@ -114,7 +114,7 @@ document.querySelector('.js-order-summary')
 document.querySelectorAll('.js-delete-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
-      const {productId} = link.dataset;
+      const { productId } = link.dataset;
       removeFromCart(productId);
 
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
@@ -134,20 +134,20 @@ updateCartQuantity();
 document.querySelectorAll('.js-update-quantity-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
-      const {productId} = link.dataset;
+      const { productId } = link.dataset;
 
       const container = document
         .querySelector(`.js-cart-item-container-${productId}`);
       container.classList.add('is-editing-quantity');
     });
-});
+  });
 
 
 document.querySelectorAll('.js-save-quantity-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
       // const productId = link.dataset.productId;
-      const {productId} = link.dataset;
+      const { productId } = link.dataset;
 
       const container = document
         .querySelector(`.js-cart-item-container-${productId}`);
@@ -158,18 +158,22 @@ document.querySelectorAll('.js-save-quantity-link')
       const quantityInput = document.querySelector(`.js-quantity-input-${productId}`);
       const newQuantity = Number(quantityInput.value);
 
-      // display the new quantity in the label
+      if (newQuantity > 0 && newQuantity < 1000) {
+        // display the new quantity in the label
 
-      const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
-      quantityLabel.innerHTML = newQuantity;
+        const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
+        quantityLabel.innerHTML = newQuantity;
 
-      // update the quantity in the cart data
+        // update the quantity in the cart data
 
-      updateQuantity(productId, newQuantity);
+        updateQuantity(productId, newQuantity);
 
-      // update the quantity in the cart summary
+        // update the quantity in the cart summary
 
-      document.querySelector('.js-return-to-home-link')
-        .innerHTML = `${calculateCartQuantity()} items`;
+        document.querySelector('.js-return-to-home-link')
+          .innerHTML = `${calculateCartQuantity()} items`;
+      } else {
+        alert('Quantity can not be less than 0 and greater than 1000');
+      }
     });
-});
+  });
