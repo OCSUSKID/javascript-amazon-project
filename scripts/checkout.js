@@ -152,28 +152,31 @@ document.querySelectorAll('.js-save-quantity-link')
       const container = document
         .querySelector(`.js-cart-item-container-${productId}`);
       container.classList.remove('is-editing-quantity');
+      
+      handleSave(productId);
 
-      // get the new quantity from the input field
+      function handleSave(productId) {
+        // get the new quantity from the input field
+        const quantityInput = document.querySelector(`.js-quantity-input-${productId}`);
+        const newQuantity = Number(quantityInput.value);
 
-      const quantityInput = document.querySelector(`.js-quantity-input-${productId}`);
-      const newQuantity = Number(quantityInput.value);
+        if (newQuantity > 0 && newQuantity < 1000) {
+          // display the new quantity in the label
 
-      if (newQuantity > 0 && newQuantity < 1000) {
-        // display the new quantity in the label
+          const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
+          quantityLabel.innerHTML = newQuantity;
 
-        const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
-        quantityLabel.innerHTML = newQuantity;
+          // update the quantity in the cart data
 
-        // update the quantity in the cart data
+          updateQuantity(productId, newQuantity);
 
-        updateQuantity(productId, newQuantity);
+          // update the quantity in the cart summary
 
-        // update the quantity in the cart summary
-
-        document.querySelector('.js-return-to-home-link')
-          .innerHTML = `${calculateCartQuantity()} items`;
-      } else {
-        alert('Quantity can not be less than 0 and greater than 1000');
+          document.querySelector('.js-return-to-home-link')
+            .innerHTML = `${calculateCartQuantity()} items`;
+        } else {
+          alert('Quantity can not be less than 0 and greater than 1000');
+        }
       }
     });
   });
