@@ -149,13 +149,12 @@ document.querySelectorAll('.js-save-quantity-link')
       // const productId = link.dataset.productId;
       const { productId } = link.dataset;
 
-      const container = document
-        .querySelector(`.js-cart-item-container-${productId}`);
-      container.classList.remove('is-editing-quantity');
-      
       handleSave(productId);
 
       function handleSave(productId) {
+        const container = document
+          .querySelector(`.js-cart-item-container-${productId}`);
+        container.classList.remove('is-editing-quantity');
         // get the new quantity from the input field
         const quantityInput = document.querySelector(`.js-quantity-input-${productId}`);
         const newQuantity = Number(quantityInput.value);
@@ -180,3 +179,4 @@ document.querySelectorAll('.js-save-quantity-link')
       }
     });
   });
+
