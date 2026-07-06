@@ -6,6 +6,14 @@ import {
 } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
+import { hello } from "https://unpkg.com/supersimpledev@1.0.1/hello.esm.js";
+import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
+
+hello();
+
+const today = dayjs();
+const deliveryDate = today.add(7, 'days');
+console.log(deliveryDate.format('dddd, MMMM D'));
 
 let cartSummaryHtml = '';
 
@@ -20,7 +28,7 @@ cart.forEach((cartItem) => {
     }
   });
 
-  console.log(matchingProduct);
+  //console.log(matchingProduct);
 
   cartSummaryHtml += `
     <div class="cart-item-container 
@@ -139,6 +147,16 @@ document.querySelectorAll('.js-update-quantity-link')
       const container = document
         .querySelector(`.js-cart-item-container-${productId}`);
       container.classList.add('is-editing-quantity');
+
+      // focus and prefill the quantity input for keyboard entry
+      const quantityInput = container.querySelector(`.js-quantity-input-${productId}`);
+      const quantityLabel = container.querySelector(`.js-quantity-label-${productId}`);
+      if (quantityInput) {
+        // prefill with current quantity and focus so Enter can be used
+        quantityInput.value = quantityLabel ? quantityLabel.innerText.trim() : '';
+        quantityInput.focus();
+        quantityInput.select && quantityInput.select();
+      }
     });
   });
 
@@ -146,37 +164,45 @@ document.querySelectorAll('.js-update-quantity-link')
 document.querySelectorAll('.js-save-quantity-link')
   .forEach((link) => {
     link.addEventListener('click', () => {
-      // const productId = link.dataset.productId;
       const { productId } = link.dataset;
-
       handleSave(productId);
-
-      function handleSave(productId) {
-        const container = document
-          .querySelector(`.js-cart-item-container-${productId}`);
-        container.classList.remove('is-editing-quantity');
-        // get the new quantity from the input field
-        const quantityInput = document.querySelector(`.js-quantity-input-${productId}`);
-        const newQuantity = Number(quantityInput.value);
-
-        if (newQuantity > 0 && newQuantity < 1000) {
-          // display the new quantity in the label
-
-          const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
-          quantityLabel.innerHTML = newQuantity;
-
-          // update the quantity in the cart data
-
-          updateQuantity(productId, newQuantity);
-
-          // update the quantity in the cart summary
-
-          document.querySelector('.js-return-to-home-link')
-            .innerHTML = `${calculateCartQuantity()} items`;
-        } else {
-          alert('Quantity can not be less than 0 and greater than 1000');
-        }
-      }
     });
   });
 
+// Reusable save handler so clicks and keyboard Enter trigger same behavior
+function handleSave(productId) {
+  const container = document
+    .querySelector(`.js-cart-item-container-${productId}`);
+  if (!container) return;
+  container.classList.remove('is-editing-quantity');
+
+  // get the new quantity from the input field
+  const quantityInput = document.querySelector(`.js-quantity-input-${productId}`);
+  const newQuantity = Number(quantityInput && quantityInput.value);
+
+  if (newQuantity > 0 && newQuantity < 1000) {
+    // display the new quantity in the label
+    const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
+    if (quantityLabel) quantityLabel.innerHTML = newQuantity;
+
+    // update the quantity in the cart data
+    updateQuantity(productId, newQuantity);
+
+    // update the quantity in the cart summary
+    document.querySelector('.js-return-to-home-link')
+      .innerHTML = `${calculateCartQuantity()} items`;
+  } else {
+    alert('Quantity can not be less than 0 and greater than 1000');
+  }
+}
+
+// Add keyboard support: press Enter in the quantity input to save
+document.querySelectorAll('.quantity-input')
+  .forEach((input) => {
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const { productId } = input.dataset;
+        handleSave(productId);
+      }
+    });
+  });
