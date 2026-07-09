@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+  <style>
+    body {
+      padding: 20px;
+    }
+
+    .carousel-inner img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="carouselExampleIndicators" class="carousel slide">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+        aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel person active">
+        <img src="images/products/countertop-blender-64-oz.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel person">
+        <img src="images/products/countertop-blender-64-oz.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel person">
+        <img src="images/products/countertop-blender-64-oz.jpg" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <button class="btn btn-primary">Check Weekend</button>
+
+  <script type="module">
+    import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
+    import isSatSun from "/scripts/checkWeekend.js";
+
+    let today = dayjs();
+
+    const nextTwoDays = today.add(2, 'days');
+    console.log(nextTwoDays.format('dddd, MMMM D, YYYY'));
+    console.log(isSatSun(nextTwoDays));
+
+    const nextFourDays = today.add(4, 'days');
+    console.log(nextFourDays.format('dddd, MMMM D, YYYY'));
+    console.log(isSatSun(nextFourDays));
+
+    const nextEightDays = today.add(8, 'days');
+    console.log(nextEightDays.format('dddd, MMMM D, YYYY'));
+    console.log(isSatSun(nextEightDays));
+
+    /*
+    const persons = [
+      {
+        surname: "Okoroafor",
+        lastName: "Success",
+        Age: 19
+      },
+      {
+        surname: "Micheal",
+        lastName: "jordan",
+        Age: 48
+      },
+      {
+        surname: "Messi",
+        lastName: "Lionel",
+        Age: 36
+      },
+      {
+        surname: "Ronaldo",
+        lastName: "Cristiano",
+        Age: 38
+      },
+      {
+        surname: "Neymar",
+        lastName: "Junior",
+        Age: 31
+      },
+      {
+        surname: "Okoroafor",
+        lastName: "Light",
+        Age: 19
+      },
+      {
+        surname: "Okoroafor",
+        lastName: "blossom",
+        Age: 19
+      }
+
+    ];
+    
+    function findMatchingSurname(personSurname) {
+      let matchingSurname;
+
+      persons.forEach((person) => {
+        if (personSurname === person.surname) {
+          matchingSurname = person.surname;
+          console.log(`
+Name:\t${matchingSurname} ${person.lastName}, 
+Age:\t${person.Age}
+        `);
+        }
+      });
+
+      if (matchingSurname === personSurname) {
+        console.log(`Found matching surname: ${matchingSurname}`);
+      } else {
+        console.log(`No matching surname found for: ${personSurname}`);
+      }
+    }
+
+    findMatchingSurname(prompt("What is your name: "));
+    */
+
+
+
+  </script>
+</body>
+
+</html>

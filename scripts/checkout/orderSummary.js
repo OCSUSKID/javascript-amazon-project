@@ -3,7 +3,7 @@ import {
   removeFromCart,
   calculateCartQuantity,
   updateQuantity,
-  updateDeliveryOption
+  updateDeliveryOption,
 } from "../../data/cart.js";
 import { products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
@@ -132,10 +132,7 @@ export function renderOrderSummary() {
         const { productId } = link.dataset;
         removeFromCart(productId);
 
-        const container = document.querySelector(
-          `.js-cart-item-container-${productId}`
-        );
-        container.remove();
+        renderOrderSummary();
 
         updateCartQuantity();
 
