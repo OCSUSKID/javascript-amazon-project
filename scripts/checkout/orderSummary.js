@@ -145,8 +145,12 @@ export function renderOrderSummary() {
         container.classList.add('is-editing-quantity');
 
         // focus and prefill the quantity input for keyboard entry
-        const quantityInput = container.querySelector(`.js-quantity-input-${productId}`);
-        const quantityLabel = container.querySelector(`.js-quantity-label-${productId}`);
+        const quantityInput = container.querySelector(
+          `.js-quantity-input-${productId}`
+        );
+        const quantityLabel = container.querySelector(
+          `.js-quantity-label-${productId}`
+        );
         if (quantityInput) {
           // prefill with current quantity and focus so Enter can be used
           quantityInput.value = quantityLabel ? quantityLabel.innerText.trim() : '';
